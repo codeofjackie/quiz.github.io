@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="./materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="./materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo" style="margin:3pt;">自我评估问卷</a>
+            </div>
+        </nav>
+    </div>
+
+    <form action="#" id="quizform">
+
+    </form>
+    <div style="text-align: center;">
+        <button id="submit" class="waves-effect waves-light btn" onclick="submit()">Submit</button>
+    </div>
+</body>
+<script>
+    const questions = [
+
+        "1.对阴茎勃起及维持勃起有多少信心?",
+        "2.受到性刺激后，有多少次阴茎能够坚挺进入阴道?",
+        "3.性交时，有多少次能在进入阴道后保持阴茎勃起?",
+        "4.性交时，保持勃起至性交完毕，有多大困难?",
+        "5.尝试性交时是否感到满足?",
+
+    ];
+    const answers = [
+        //            IIEF-5
+        [
+            "",
+            "很低",
+            "低",
+            "中等",
+            "高",
+            "很高",
+            ""
+        ],
+        [
+            "无性活动",
+            "几乎没有或完全没有",
+            "只有几次",
+            "有时或大约一半时候",
+            "大多数时候",
+            "几乎每次或每次",
+            ""
+        ],
+        [
+            "没有尝试性交",
+            "几乎没有或完全没有",
+            "只有几次",
+            "有时或大约一半时候",
+            "大多数时候",
+            "几乎每次或每次",
+            ""
+        ],
+        [
+            "没有尝试性交",
+            "非常困难",
+            "很困难",
+            "有困难",
+            "有点困难",
+            "不困难",
+            ""
+        ],
+        [
+            "没有尝试性交",
+            "几乎没有或完全没有",
+            "只有几次",
+            "有时或大约一半时候",
+            "大多数时候",
+            "几乎每次或每次",
+            ""
+        ],
+
+    ];
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelector('#modal1');
+        var instances = M.Modal.init(elems);
+        instance = M.Modal.getInstance(elems);
+    });
+
+    for (let i = 0; i < questions.length; i++) {
+        const ques = questions[i];
+        let block = document.createElement("div");
+        let question = document.createElement("p");
+        question.innerText = ques;
+        block.appendChild(question)
+        for (let j = 0; j < answers[i].length; j++) {
+            const ans = answers[i][j];
+            let label = document.createElement("label")
+            label.style.margin = "5pt";
+            let radio = document.createElement('input')
+            radio.setAttribute(
+                "type",
+                "radio"
+            )
+            value = (i == 0) ? j + 1 : j
+            radio.setAttribute(
+                "value",
+                value
+            )
+            radio.setAttribute(
+                "class",
+                "with-gap"
+            )
+            radio.setAttribute(
+                "name",
+                "ques" + i
+            )
+            let span = document.createElement('span')
+            span.innerText = ans
+
+            if (span.innerText != "") {
+                label.appendChild(radio);
+                label.appendChild(span);
+                block.appendChild(label);
+                block.appendChild(document.createElement('br'));
+            }
+
+        }
+        document.getElementById("quizform").appendChild(block)
+    }
+
+    function submit() {
+        var ans = [];
+        for (let i = 0; i < questions.length; i++) {
+            let checked = document.querySelector("input[name='ques" + i + "']:checked");
+            if (checked != null) {
+                ans[i] = parseInt(checked.value);
+            } else {
+                alert("请全部填写后提交！");
+                return;
+            }
+        }
+
+        let IEFF5 = 0;
+        for (let i = 0; i < ans.length; i++) {
+            IEFF5 += ans[i];
+        }
+
+        if (IEFF5 >= 22) IEFF5result = "正常";
+        else if (IEFF5 >= 12 && IEFF5 <= 21) IEFF5result = "轻度,建议咨询专科医师";
+        else if (IEFF5 >= 8 && IEFF5 <= 11) IEFF5result = "中度,建议咨询专科医师";
+        else IEFF5result = "重度,建议咨询专科医师";
+
+        quizresult =
+            'IEFF5得分：' + IEFF5 + "\n结果" + IEFF5result + "\n";
+        alert(quizresult);
+    }
+</script>
+
+</html>

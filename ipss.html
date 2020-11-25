@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="./materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="./materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo" style="margin:3pt;">自我评估问卷</a>
+            </div>
+        </nav>
+    </div>
+
+    <form action="#" id="quizform">
+
+    </form>
+    <div style="text-align: center;">
+        <button id="submit" class="waves-effect waves-light btn" onclick="submit()">Submit</button>
+    </div>
+</body>
+<script>
+    const questions = [
+        "1.是否经常有尿不尽的感觉?",
+        "2.两次排尿时间是否经常小于2小时?",
+        "3.是否经常有间断性排尿?",
+        "4.是否经常有憋尿困难?",
+        "5.是否经常有尿线变细现象?",
+        "6.是否经常需要用力及使劲才能开始排尿?",
+        "7.从入睡到早起一般需要起来排尿几次?"
+
+    ];
+    const answers = [
+        //            IPSS
+        [
+            "无",
+            "少于1/5",
+            "少于1/2",
+            "1/2",
+            "多于1/2",
+            "几乎总是",
+            ""
+        ],
+        [
+            "无",
+            "少于1/5",
+            "少于1/2",
+            "1/2",
+            "多于1/2",
+            "几乎总是",
+            ""
+        ],
+        [
+            "无",
+            "少于1/5",
+            "少于1/2",
+            "1/2",
+            "多于1/2",
+            "几乎总是",
+            ""
+        ],
+        [
+            "无",
+            "少于1/5",
+            "少于1/2",
+            "1/2",
+            "多于1/2",
+            "几乎总是",
+            ""
+        ],
+        [
+            "无",
+            "少于1/5",
+            "少于1/2",
+            "1/2",
+            "多于1/2",
+            "几乎总是",
+            ""
+        ],
+        [
+            "无",
+            "少于1/5",
+            "少于1/2",
+            "1/2",
+            "多于1/2",
+            "几乎总是",
+            ""
+        ],
+        [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            ""
+        ]
+    ];
+
+    for (let i = 0; i < questions.length; i++) {
+        const ques = questions[i];
+        let block = document.createElement("div");
+        let question = document.createElement("p");
+        question.innerText = ques;
+        block.appendChild(question)
+        for (let j = 0; j < answers[i].length; j++) {
+            const ans = answers[i][j];
+            let label = document.createElement("label")
+            label.style.margin = "5pt";
+            let radio = document.createElement('input')
+            radio.setAttribute(
+                "type",
+                "radio"
+            )
+            radio.setAttribute(
+                "value",
+                j
+            )
+            radio.setAttribute(
+                "class",
+                "with-gap"
+            )
+            radio.setAttribute(
+                "name",
+                "ques" + i
+            )
+            let span = document.createElement('span')
+            span.innerText = ans
+
+            if (span.innerText != "") {
+                label.appendChild(radio);
+                label.appendChild(span);
+                block.appendChild(label);
+                block.appendChild(document.createElement('br'));
+            }
+
+        }
+        document.getElementById("quizform").appendChild(block)
+    }
+
+    function submit() {
+        var ans = [];
+        for (let i = 0; i < questions.length; i++) {
+            let checked = document.querySelector("input[name='ques" + i + "']:checked");
+            if (checked != null) {
+                ans[i] = parseInt(checked.value);
+            } else {
+                alert("请全部填写后提交！");
+                return;
+            }
+        }
+        //
+        let IPSS = 0;
+
+        for (let i = 0; i < ans.length; i++) {
+            IPSS += ans[i];
+        }
+        if (IPSS == 0) IPSSresult = "正常";
+        else if (IPSS >= 1 && IPSS <= 7) IPSSresult = "轻度,建议咨询专科医师";
+        else if (IPSS >= 8 && IPSS <= 19) IPSSresult = "中度,建议咨询专科医师";
+        else IPSSresult = "重度,建议咨询专科医师";
+
+        quizresult =
+            'IPSS得分：' + IPSS + "\n结果" + IPSSresult + "\n";
+
+        alert(quizresult);
+    }
+</script>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="./materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="./materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo" style="margin:3pt;">QoL问卷</a>
+            </div>
+        </nav>
+    </div>
+
+    <form action="#" id="quizform">
+
+    </form>
+    <div style="text-align: center;">
+        <button id="submit" class="waves-effect waves-light btn" onclick="submit()">Submit</button>
+    </div>
+</body>
+<script>
+    const questions = [
+        "如果在您今后的生活中始终伴有现在的排尿症状,您认为如何?"
+
+    ];
+    const answers = [
+        "高兴",
+        "满意",
+        "大致满意",
+        "还可以",
+        "不太满意",
+        "苦恼",
+        "很糟"
+    ];
+
+    const ques = questions[0];
+    let block = document.createElement("div");
+    let question = document.createElement("p");
+    question.innerText = ques;
+    block.appendChild(question)
+    for (let j = 0; j < answers.length; j++) {
+        const ans = answers[j];
+        let label = document.createElement("label")
+        label.style.margin = "5pt";
+        let radio = document.createElement('input')
+        radio.setAttribute(
+            "type",
+            "radio"
+        )
+        radio.setAttribute(
+            "value",
+            j
+        )
+        radio.setAttribute(
+            "class",
+            "with-gap"
+        )
+        radio.setAttribute(
+            "name",
+            "ques"
+        )
+        let span = document.createElement('span')
+        span.innerText = ans
+
+        if (span.innerText != "") {
+            label.appendChild(radio);
+            label.appendChild(span);
+            block.appendChild(label);
+            block.appendChild(document.createElement('br'));
+        }
+
+    }
+    document.getElementById("quizform").appendChild(block);
+
+    function submit() {
+        let checked = document.querySelector("input[name='ques']:checked");
+        if (checked != null) {
+            var QoL = parseInt(checked.value);
+        } else {
+            alert("请全部填写后提交！");
+            return;
+        }
+        QoLResult = (QoL > 1) ? "异常，建议咨询专科医师" : "正常";
+
+        quizresult =
+            'QoL得分：' + QoL + "\n结果" + QoLResult + "\n";
+
+        alert(quizresult);
+    }
+</script>
+
+</html>
