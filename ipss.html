@@ -16,7 +16,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo" style="margin:3pt;">自我评估问卷</a>
+                <!-- <a href="#!" class="brand-logo" style="margin:3pt;">自我评估问卷</a> -->
             </div>
         </nav>
     </div>
@@ -165,12 +165,12 @@
             IPSS += ans[i];
         }
         if (IPSS == 0) IPSSresult = "正常";
-        else if (IPSS >= 1 && IPSS <= 7) IPSSresult = "轻度,建议咨询专科医师";
-        else if (IPSS >= 8 && IPSS <= 19) IPSSresult = "中度,建议咨询专科医师";
-        else IPSSresult = "重度,建议咨询专科医师";
+        else if (IPSS >= 1 && IPSS <= 7) IPSSresult = "轻度\n建议咨询专科医师";
+        else if (IPSS >= 8 && IPSS <= 19) IPSSresult = "中度\n建议咨询专科医师";
+        else IPSSresult = "重度\n建议咨询专科医师";
 
         quizresult =
-            'IPSS得分：' + IPSS + "\n结果" + IPSSresult + "\n";
+            'IPSS得分：' + IPSS + "\n结果：" + IPSSresult + "\n";
 
         alert(quizresult);
     }

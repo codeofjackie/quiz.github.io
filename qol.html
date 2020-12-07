@@ -16,7 +16,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo" style="margin:3pt;">QoL问卷</a>
+                <!-- <a href="#!" class="brand-logo" style="margin:3pt;">QoL问卷</a> -->
             </div>
         </nav>
     </div>
@@ -90,10 +90,10 @@
             alert("请全部填写后提交！");
             return;
         }
-        QoLResult = (QoL > 1) ? "异常，建议咨询专科医师" : "正常";
+        QoLResult = (QoL > 1) ? "异常\n建议咨询专科医师" : "正常";
 
         quizresult =
-            'QoL得分：' + QoL + "\n结果" + QoLResult + "\n";
+            'QoL得分：' + QoL + "\n结果：" + QoLResult + "\n";
 
         alert(quizresult);
     }

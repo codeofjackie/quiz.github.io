@@ -16,7 +16,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo" style="margin:3pt;">自我评估问卷</a>
+                <!-- <a href="#!" class="brand-logo" style="margin:3pt;">自我评估问卷</a> -->
             </div>
         </nav>
     </div>
@@ -155,12 +155,12 @@
         }
 
         if (IEFF5 >= 22) IEFF5result = "正常";
-        else if (IEFF5 >= 12 && IEFF5 <= 21) IEFF5result = "轻度,建议咨询专科医师";
-        else if (IEFF5 >= 8 && IEFF5 <= 11) IEFF5result = "中度,建议咨询专科医师";
-        else IEFF5result = "重度,建议咨询专科医师";
+        else if (IEFF5 >= 12 && IEFF5 <= 21) IEFF5result = "轻度\n建议咨询专科医师";
+        else if (IEFF5 >= 8 && IEFF5 <= 11) IEFF5result = "中度\n建议咨询专科医师";
+        else IEFF5result = "重度\n建议咨询专科医师";
 
         quizresult =
-            'IEFF5得分：' + IEFF5 + "\n结果" + IEFF5result + "\n";
+            'IEFF5得分：' + IEFF5 + "\n结果：" + IEFF5result + "\n";
         alert(quizresult);
     }
 </script>
